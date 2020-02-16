@@ -2,8 +2,10 @@
 
 <div class="container">
     <h1 class="mt-5">Welcome to the user database</h1>
-   
-    
+   <form style="display: inline" action="/home/deleteall?_method=DELETE" method="POST">
+        <button id="warning" class="btn btn-danger">Delete Database</button>
+    </form>
+    <a href="/fetch" style="display: inline" class="btn btn-warning">Fetch Data from API</a>    
     <table class="table table-striped mt-5" >
         <thead>
             <tr>
@@ -15,18 +17,56 @@
                 <th>Description</th>
                 <th>Contact</th>
                 <th>Empcode</th>
-                <th>Action</th>
             </tr>
         </thead>
         <tbody>
             <% data.forEach(function(e){ %>
-                <tr><td><%= e.id %></td><td><img src="<%= e.image %>" style="width: 50px; height: 50px"> &nbsp; <%= e.name %></td><td><%= e.category %></td>
+                <tr data-toggle="modal" data-target="#exampleModal" data-empid="<%= e.id %>" data-name="<%= e.name %>" data-categoryid="<%= e.categoryid %>" data-category="<%= e.category %>" data-address="<%= e.address %>" data-description="<%= e.description %>" data-contact="<%= e.contact %>" data-empcode="<%= e.empcode %>" data-editbutton="<%= e._id %>" data-deletebutton="<%= e._id %>">
+                    <td><%= e.id %></td><td><img src="<%= e.image %>" style="width: 50px; height: 50px"> &nbsp; <%= e.name %></td><td><%= e.category %></td>
                     <td><%= e.categoryid %></td><td><%= e.address %></td><td><%= e.description %></td><td><%= e.contact %></td><td><%= e.empcode %></td>
-                    <td><a href="/home/<%= e._id %>/edit">Edit</a><form action="/home/<%= e._id %>?_method=DELETE" method="Post"><button class="btn btn-link p-0">Delete</button></form></td></tr>
+                </tr>
                     <% }) %>
                 </tbody>
             </table>
         </div>
+
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <p>Name: <span id="empname">Random </span></p>
+                    <p>Category ID: <span id="empcategoryid">Random </span></p>
+                    <p>Category: <span id="empcategory">Random </span></p>
+                    <p>Address: <span id="empaddress">Random </span></p>
+                    <p>Description: <span id="empdescription">Random </span></p>
+                    <p>Contact: <span id="empcontact">Random </span></p>
+                    <p>EmpCode: <span id="empcode">Random </span></p>
+                  <!-- <form>
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">Recipient:</label>
+                      <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Message:</label>
+                      <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                  </form> -->
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <a class="btn btn-primary" id="editbutton" class="btn btn-primary">Edit</a>
+                  <form id="deletebutton" method="Post"><button class="btn btn-danger">Delete</button></form>
+                </div>
+              </div>
+            </div>
+          </div>
         
         <%- include("partials/footer") %>
         
