@@ -1,0 +1,32 @@
+<%- include("partials/header") %>
+
+<div class="container">
+    <h1>Edit database</h1>
+    
+    <form action="/home/<%= foundData._id %>?_method=PUT" method="POST">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input class="form-control" id="name" type="text" name="user[name]" value="<%= foundData.name %>">
+        </div>
+        <div class="form-group">
+            <label for="categoryid">Category ID:</label>
+            <input class="form-control" id="categoryid" type="text" name="user[categoryid]" value="<%= foundData.categoryid %>">
+        </div>
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <input class="form-control" id="category" type="text" name="user[category]" value="<%= foundData.category %>">
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input class="form-control" id="address" type="text" name="user[address]" value="<%= foundData.address %>">
+        </div>
+        <div class="form-group">
+            <label for="contact">Contact:</label>
+            <input class="form-control" id="contact" type="number" name="user[contact]" value="<%= foundData.contact %>">
+        </div>
+        <button class="btn btn-primary btn-block">Update Employeed Data</button>
+    </form>
+    
+</div>
+
+<%- include("partials/footer") %>
