@@ -17,21 +17,21 @@ mongoose.set('useUnifiedTopology', true);
 
 mongoose.connect("mongodb://localhost/bizita");
 
-// request("http://hradmin.aryupay.io/tracking/viewreport.php", function(err, response, body){
-//     if(!err && response.statusCode===200){
-//         var api = JSON.parse(body);
-//         // console.log( api.Success);
-//         Data.insertMany(api.Success, function(err, data){
-//             if(err){
-//                 console.log(err);
-//             }else{
-//                console.log(data)
-//             }
-//         });
-//     }else{
-//         console.log(err);
-//     }
-// })
+request("http://hradmin.aryupay.io/tracking/viewreport.php", function(err, response, body){
+    if(!err && response.statusCode===200){
+        var api = JSON.parse(body);
+        // console.log( api.Success);
+        Data.insertMany(api.Success, function(err, data){
+            if(err){
+                console.log(err);
+            }else{
+               console.log(data)
+            }
+        });
+    }else{
+        console.log(err);
+    }
+})
 
 app.get("/home", function(req, res){
     Data.find({},function(err, data){
